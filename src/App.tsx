@@ -16,7 +16,7 @@ function App() {
   const [network, setNetwork] = useState("livenet");
 
   const getBasicInfo = async () => {
-    const unisat = (window as any).unisat;
+    const unisat = (window as any)?.bybitWallet?.bitcoin;
     const [address] = await unisat.getAccounts();
     setAddress(address);
 
@@ -60,11 +60,11 @@ function App() {
   useEffect(() => {
 
     async function checkUnisat() {
-      let unisat = (window as any).unisat;
+      let unisat = (window as any)?.bybitWallet?.bitcoin;
 
       for (let i = 1; i < 10 && !unisat; i += 1) {
           await new Promise((resolve) => setTimeout(resolve, 100*i));
-          unisat = (window as any).unisat;
+          unisat = (window as any)?.bybitWallet?.bitcoin;
       }
 
       if(unisat){
@@ -106,7 +106,7 @@ function App() {
       </div>
     );
   }
-  const unisat =  (window as any)?.bybitWallet?.bitcoin || (window as any).unisat;
+  const unisat =  (window as any)?.bybitWallet?.bitcoin || (window as any)?.bybitWallet?.bitcoin;
   return (
     <div className="App">
       <header className="App-header">
@@ -206,7 +206,7 @@ function SignPsbtCard() {
         style={{ marginTop: 10 }}
         onClick={async () => {
           try {
-            const psbtResult = await (window as any).unisat.signPsbt(psbtHex);
+            const psbtResult = await (window as any)?.bybitWallet?.bitcoin.signPsbt(psbtHex);
             setPsbtResult(psbtResult);
           } catch (e) {
             setPsbtResult((e as any).message);
@@ -240,7 +240,7 @@ function SignMessageCard() {
       <Button
         style={{ marginTop: 10 }}
         onClick={async () => {
-          const signature = await (window as any).unisat.signMessage(message);
+          const signature = await (window as any)?.bybitWallet?.bitcoin.signMessage(message);
           setSignature(signature);
         }}
       >
@@ -276,7 +276,7 @@ function PushTxCard() {
         style={{ marginTop: 10 }}
         onClick={async () => {
           try {
-            const txid = await (window as any).unisat.pushTx(rawtx);
+            const txid = await (window as any)?.bybitWallet?.bitcoin.pushTx(rawtx);
             setTxid(txid);
           } catch (e) {
             setTxid((e as any).message);
@@ -311,7 +311,7 @@ function PushPsbtCard() {
         style={{ marginTop: 10 }}
         onClick={async () => {
           try {
-            const txid = await (window as any).unisat.pushPsbt(psbtHex);
+            const txid = await (window as any)?.bybitWallet?.bitcoin.pushPsbt(psbtHex);
             setTxid(txid);
           } catch (e) {
             setTxid((e as any).message);
@@ -359,7 +359,7 @@ function SendBitcoin() {
         style={{ marginTop: 10 }}
         onClick={async () => {
           try {
-            const txid = await (window as any).unisat.sendBitcoin(
+            const txid = await (window as any)?.bybitWallet?.bitcoin.sendBitcoin(
               toAddress,
               satoshis
             );
