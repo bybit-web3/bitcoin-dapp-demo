@@ -5,7 +5,7 @@ import { Button, Card, Input, Radio } from "antd";
 function App() {
   const [unisatInstalled, setUnisatInstalled] = useState(false);
   const [connected, setConnected] = useState(false);
-  const [accounts, setAccounts] = useState<string[]>([]);
+  const [, setAccounts] = useState<string[]>([]);
   const [publicKey, setPublicKey] = useState("");
   const [address, setAddress] = useState("");
   const [balance, setBalance] = useState({
@@ -86,6 +86,7 @@ function App() {
     }
 
     checkUnisat().then();
+    // eslint-disable-next-line
   }, []);
 
   if (!unisatInstalled) {
@@ -95,21 +96,21 @@ function App() {
           <div>
             <Button
               onClick={() => {
-                window.location.href = "https://unisat.io";
+                window.location.href = "https://chromewebstore.google.com/detail/bybit-wallet/pdliaogehgdbhbnmkklieghmmjkpigpa";
               }}
             >
-              Install Unisat Wallet
+              Please Install Bybit Wallet
             </Button>
           </div>
         </header>
       </div>
     );
   }
-  const unisat = (window as any).unisat;
+  const unisat =  (window as any)?.bybitWallet?.bitcoin || (window as any).unisat;
   return (
     <div className="App">
       <header className="App-header">
-        <p>Unisat Wallet Demo</p>
+        <p>Bybit Wallet bitcoin Demo</p>
 
         {connected ? (
           <div
@@ -174,7 +175,7 @@ function App() {
                 handleAccountsChanged(result);
               }}
             >
-              Connect Unisat Wallet
+              Connect Bybit Wallet
             </Button>
           </div>
         )}
