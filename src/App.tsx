@@ -282,7 +282,7 @@ function GetInscriptionCard() {
       <Button
         style={{ marginTop: 10 }}
         onClick={async () => {
-          const list = await (window as any)?.bybitWallet?.bitcoin.getInscriptions(cursor, size);
+          const list = await (window as any)?.bybitWallet?.bitcoin.getInscriptions(Number(cursor), Number(size));
           setList(list);
         }}
       >
