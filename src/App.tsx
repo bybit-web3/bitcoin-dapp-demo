@@ -161,6 +161,7 @@ function App() {
               </div>
             </Card>
 
+            <GetInscriptionCard />
             <SignPsbtCard />
             <SignMessageCard />
             <PushTxCard />
@@ -242,6 +243,47 @@ function SignMessageCard() {
         onClick={async () => {
           const signature = await (window as any)?.bybitWallet?.bitcoin.signMessage(message);
           setSignature(signature);
+        }}
+      >
+        Sign Message
+      </Button>
+    </Card>
+  );
+}
+
+function GetInscriptionCard() {
+  const [cursor, setCursor] = useState('0')
+  const [size, setSize] = useState('20')
+  const [list, setList] = useState([]);
+  return (
+    <Card size="small" title="Get Inscription" style={{ width: 300, margin: 10 }}>
+      <div style={{ textAlign: "left", marginTop: 10 }}>
+        <div style={{ fontWeight: "bold" }}>cursor:</div>
+        <Input
+          defaultValue={cursor}
+          onChange={(e) => {
+            setCursor(e.target.value);
+          }}
+        ></Input>
+      </div>
+      <div style={{ textAlign: "left", marginTop: 10 }}>
+        <div style={{ fontWeight: "bold" }}>size:</div>
+        <Input
+          defaultValue={size}
+          onChange={(e) => {
+            setSize(e.target.value);
+          }}
+        ></Input>
+      </div>
+      <div style={{ textAlign: "left", marginTop: 10 }}>
+        <div style={{ fontWeight: "bold" }}>inscription list:</div>
+        <div style={{ wordWrap: "break-word" }}>{JSON.stringify(list)}</div>
+      </div>
+      <Button
+        style={{ marginTop: 10 }}
+        onClick={async () => {
+          const list = await (window as any)?.bybitWallet?.bitcoin.getInscriptions(cursor, size);
+          setList(list);
         }}
       >
         Sign Message
