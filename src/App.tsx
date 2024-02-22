@@ -368,7 +368,7 @@ function PushPsbtCard() {
 
 function SendBitcoin() {
   const [toAddress, setToAddress] = useState(
-    "tb1qmfla5j7cpdvmswtruldgvjvk87yrflrfsf6hh0"
+    "bc1q56dehmp56mkefpl05z9z38ltsp378zke0n30lc"
   );
   const [satoshis, setSatoshis] = useState(1000);
   const [txid, setTxid] = useState("");
